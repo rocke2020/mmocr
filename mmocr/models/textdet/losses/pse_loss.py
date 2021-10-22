@@ -1,6 +1,7 @@
+# Copyright (c) OpenMMLab. All rights reserved.
 from mmdet.core import BitmapMasks
-from mmdet.models.builder import LOSSES
 
+from mmocr.models.builder import LOSSES
 from mmocr.utils import check_argument
 from . import PANLoss
 
@@ -42,7 +43,7 @@ class PSELoss(PANLoss):
             gt_kernels (list[BitmapMasks]): The kernel list with each element
                 being the text kernel mask for one img.
             gt_mask (list[BitmapMasks]): The effective mask list
-                with each element being the effective mask fo one img.
+                with each element being the effective mask for one img.
             downsample_ratio (float): The downsample ratio between score_maps
                 and the input img.
 

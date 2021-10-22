@@ -1,8 +1,9 @@
+# Copyright (c) OpenMMLab. All rights reserved.
 import torch
 import torch.nn.functional as F
-from mmdet.models.builder import LOSSES
 from torch import nn
 
+from mmocr.models.builder import LOSSES
 from mmocr.models.common.losses.dice_loss import DiceLoss
 
 
@@ -114,9 +115,9 @@ class DBLoss(nn.Module):
             downsample_ratio (float): The downsample ratio for the
                 ground truths.
             gt_shrink (list[BitmapMasks]): The mask list with each element
-                being the shrinked text mask for one img.
+                being the shrunk text mask for one img.
             gt_shrink_mask (list[BitmapMasks]): The effective mask list with
-                each element being the shrinked effective mask for one img.
+                each element being the shrunk effective mask for one img.
             gt_thr (list[BitmapMasks]): The mask list with each element
                 being the threshold text mask for one img.
             gt_thr_mask (list[BitmapMasks]): The effective mask list with
@@ -132,8 +133,6 @@ class DBLoss(nn.Module):
         assert isinstance(gt_shrink_mask, list)
         assert isinstance(gt_thr, list)
         assert isinstance(gt_thr_mask, list)
-
-        preds = preds[0]
 
         pred_prob = preds[:, 0, :, :]
         pred_thr = preds[:, 1, :, :]

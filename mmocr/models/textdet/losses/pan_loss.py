@@ -1,3 +1,4 @@
+# Copyright (c) OpenMMLab. All rights reserved.
 import itertools
 import warnings
 
@@ -5,9 +6,9 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 from mmdet.core import BitmapMasks
-from mmdet.models.builder import LOSSES
 from torch import nn
 
+from mmocr.models.builder import LOSSES
 from mmocr.utils import check_argument
 
 
@@ -95,7 +96,7 @@ class PANLoss(nn.Module):
             gt_kernels (list[BitmapMasks]): The kernel list with each element
                 being the text kernel mask for one img.
             gt_mask (list[BitmapMasks]): The effective mask list
-                with each element being the effective mask fo one img.
+                with each element being the effective mask for one img.
             downsample_ratio (float): The downsample ratio between preds
                 and the input img.
 
@@ -261,7 +262,7 @@ class PANLoss(nn.Module):
         pred = pred * mask
         target = target * mask
 
-        a = torch.sum(pred * target, 1)
+        a = torch.sum(pred * target, 1) + smooth
         b = torch.sum(pred * pred, 1) + smooth
         c = torch.sum(target * target, 1) + smooth
         d = (2 * a) / (b + c)
