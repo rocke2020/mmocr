@@ -14,7 +14,8 @@ PORT=${PORT:-29500}
 
 PYTHONPATH="$(dirname $0)/..":$PYTHONPATH \
 
-if [ ${GPUS} == 1 ]; then
+if [ ${GPUS} == 1 ]
+then
     python $(dirname "$0")/train.py  $CONFIG --work-dir=${WORK_DIR} ${@:4}
 else
     python -m torch.distributed.launch --nproc_per_node=$GPUS --master_port=$PORT \
